@@ -1,179 +1,192 @@
+```html
 <!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Web Engineering Lab</title>
     <link rel="stylesheet" href="style.css" />
-</head>
+  </head>
 
-<body>
-
-    <a href="#main" class="skip-link">Skip to main content</a>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <header>
-        <h1 id="greeting"></h1>
+      <h1 id="greeting">Hello, Laibah Rauf!</h1>
 
-        <nav>
-            <ul>
-                <li>
-                    <a href="#schedule" aria-current="location">
-                        Office Hours
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#feedback">
-                        Send Feedback
-                    </a>
-                </li>
-            </ul>
-        </nav>
+      <nav aria-label="Main">
+        <ul>
+          <li>
+            <a href="#schedule" class="nav-link" aria-current="location">
+              Office Hours
+            </a>
+          </li>
+          <li>
+            <a href="#feedback" class="nav-link">Send Feedback</a>
+          </li>
+        </ul>
+      </nav>
     </header>
 
-    <main id="main">
+    <main id="main-content">
+      <section id="schedule" aria-labelledby="schedule-heading">
+        <h2 id="schedule-heading" class="span-all">Office Hours</h2>
 
-        <section id="schedule">
+        <table>
+          <caption>
+            Weekly office hours
+          </caption>
 
-            <h2>Office Hours</h2>
+          <thead>
+            <tr>
+              <th scope="col">Day</th>
+              <th scope="col">Time</th>
+              <th scope="col">Book</th>
+            </tr>
+          </thead>
 
-            <table>
-                <caption>Weekly office hours</caption>
-
-                <thead>
-                    <tr>
-                        <th scope="col">Day</th>
-                        <th scope="col">Time</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <td>Monday</td>
-                        <td>
-                            <time datetime="10:00">10:00</time>–
-                            <time datetime="11:00">11:00</time>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <figure>
-                <svg
-                    role="img"
-                    aria-labelledby="pin-title"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
+          <tbody>
+            <tr>
+              <th scope="row">Monday</th>
+              <td>
+                <time datetime="09:00">9:00</time>–<time datetime="10:00"
+                  >10:00</time
                 >
-                    <title id="pin-title">Location pin</title>
+              </td>
+              <td>
+                <button type="button" data-day="Monday">Book</button>
+              </td>
+            </tr>
 
-                    <path
-                        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-                        fill="currentColor"
-                    />
-                </svg>
+            <tr>
+              <th scope="row">Wednesday</th>
+              <td>
+                <time datetime="11:00">11:00</time>–<time datetime="12:30"
+                  >12:30</time
+                >
+              </td>
+              <td>
+                <button type="button" data-day="Wednesday">Book</button>
+              </td>
+            </tr>
 
-                <figcaption>
-                    All office hours are held in Room 214.
-                </figcaption>
-            </figure>
+            <tr>
+              <th scope="row">Friday</th>
+              <td>
+                <time datetime="13:00">1:00</time>–<time datetime="14:00"
+                  >2:00</time
+                >
+              </td>
+              <td>
+                <button type="button" data-day="Friday">Book</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-        </section>
+        <p
+          id="booking-status"
+          class="span-all"
+          role="status"
+          aria-live="polite"
+        >
+          No office hours booked.
+        </p>
 
-        <svg
-            aria-hidden="true"
+        <figure>
+          <svg
+            role="img"
+            aria-labelledby="pin-title"
             width="24"
             height="24"
             viewBox="0 0 24 24"
-        >
-            <circle
-                cx="12"
-                cy="12"
-                r="3"
-                fill="currentColor"
+          >
+            <title id="pin-title">Location pin</title>
+            <path
+              d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"
+              fill="#0b3d91"
             />
-        </svg>
+          </svg>
 
-        <section id="feedback">
+          <figcaption>All office hours are held in Room 214.</figcaption>
+        </figure>
+      </section>
 
-            <h2>Send Feedback</h2>
+      <svg
+        aria-hidden="true"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        class="divider"
+      >
+        <circle cx="12" cy="12" r="3" fill="#0b3d91" />
+      </svg>
 
-            <form>
+      <section id="feedback" aria-labelledby="feedback-heading">
+        <h2 id="feedback-heading">Send Feedback</h2>
 
-                <label for="name">Name:</label>
+        <form action="#" method="post">
+          <p class="field">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              autocomplete="name"
+              required
+            />
+          </p>
 
-                <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    required
-                />
+          <p class="field">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              required
+              aria-describedby="email-hint"
+            />
+            <span id="email-hint">
+              We will only use this to reply to you.
+            </span>
+          </p>
 
-                <label for="email">Email:</label>
+          <fieldset class="span-all">
+            <legend>Topic</legend>
 
-                <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    required
-                    aria-describedby="email-hint"
-                />
+            <div class="radio">
+              <input
+                type="radio"
+                id="topic-lab"
+                name="topic"
+                value="lab-content"
+                checked
+              />
+              <label for="topic-lab">Lab content</label>
+            </div>
 
-                <span id="email-hint" class="text-muted">
-                    We will only use this to reply to you.
-                </span>
+            <div class="radio">
+              <input type="radio" id="topic-other" name="topic" value="other" />
+              <label for="topic-other">Something else</label>
+            </div>
+          </fieldset>
 
-                <fieldset>
+          <div class="field span-all">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
 
-                    <legend>Topic</legend>
-
-                    <label>
-                        <input
-                            type="radio"
-                            name="topic"
-                            value="general"
-                            checked
-                        />
-                        General Inquiry
-                    </label>
-
-                    <label>
-                        <input
-                            type="radio"
-                            name="topic"
-                            value="lab"
-                        />
-                        Lab Question
-                    </label>
-
-                </fieldset>
-
-                <label for="message">Message</label>
-
-                <textarea
-                    id="message"
-                    name="message"
-                    required
-                ></textarea>
-
-                <button type="submit">Submit</button>
-
-            </form>
-
-        </section>
-
+          <button type="submit">Send</button>
+        </form>
+      </section>
     </main>
 
     <footer>
-        <address>
-            Contact me: saimroofi@gmail.com
-        </address>
+      <address>Contact your instructor for help.</address>
     </footer>
 
-    <script type="module" src="script.js"></script>
-
-</body>
-
+    <script type="module" src="main.js"></script>
+  </body>
 </html>
+```

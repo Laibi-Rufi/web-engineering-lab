@@ -1,9 +1,5 @@
 @layer reset, base, components, utilities;
 
-/* =========================
-   RESET
-   ========================= */
-
 @layer reset {
   *,
   *::before,
@@ -11,119 +7,217 @@
     box-sizing: border-box;
   }
 
-  html,
-  body {
+  body,
+  h1,
+  h2,
+  p,
+  figure {
     margin: 0;
-    padding: 0;
   }
 }
 
-/* =========================
-   BASE
-   ========================= */
-
 @layer base {
   :root {
-    color-scheme: light dark;
-
+    color-scheme: light;
     --space: 1rem;
+    --color-bg: oklch(98% 0.01 255);
+    --color-text: oklch(25% 0.02 255);
+    --color-accent: oklch(40% 0.16 255);
 
-    --color-accent: oklch(55% 0.22 255);
-    --color-text: light-dark(oklch(25% 0.02 255), oklch(95% 0.02 255));
+    --color-surface: color-mix(in oklch, var(--color-bg) 92%, var(--color-accent));
 
-    --color-surface: light-dark(oklch(98% 0.01 255), oklch(20% 0.02 255));
+    --color-border: color-mix(in oklch, var(--color-text) 30%, var(--color-bg));
 
-    --color-border: light-dark(oklch(75% 0.02 255), oklch(45% 0.02 255));
-
-    --color-muted: light-dark(oklch(55% 0.02 255), oklch(70% 0.02 255));
-
-    --color-button-text: light-dark(white, oklch(100% 0 0));
+    --color-muted: oklch(40% 0.02 255);
   }
 
   body {
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-
-    background-color: var(--color-surface);
+    font-family: system-ui, sans-serif;
+    line-height: 1.5;
+    padding: var(--space);
+    background-color: var(--color-bg);
     color: var(--color-text);
   }
 
+  input,
+  textarea,
+  button,
+  select {
+    font: inherit;
+  }
+}
+
+@layer components {
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space);
+    padding-block-end: var(--space);
+    border-block-end: 1px solid var(--color-border);
+  }
+
+  nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  nav a,
   a {
     color: var(--color-accent);
   }
 
-  input,
-  button,
-  select,
-  textarea {
-    font: inherit;
+  nav a {
+    text-decoration: none;
   }
 
-  h1,
-  h2 {
+  nav a:hover {
+    text-decoration: underline;
+  }
+
+  a[aria-current="location"] {
+    font-weight: bold;
+  }
+
+  main {
+    max-inline-size: 1000px;
+    margin-inline: auto;
+    padding-block: var(--space);
+  }
+
+  #schedule {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space);
+  }
+
+  #schedule table {
+    inline-size: 100%;
+    border-collapse: collapse;
+  }
+
+  #schedule th,
+  #schedule td {
+    padding: 0.5rem;
+    border: 1px solid var(--color-border);
+    text-align: start;
+  }
+
+  #schedule tr.selected {
+    background-color: var(--color-surface);
+    outline: 2px solid var(--color-accent);
+    outline-offset: -2px;
+  }
+
+  figure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space);
+    flex-wrap: wrap;
+  }
+
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space);
+  }
+
+  form p {
+    margin-block: 0.5rem 1rem;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  fieldset {
+    border: 1px solid var(--color-border);
+    padding: var(--space);
+  }
+
+  .radio {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-block: 0.5rem;
+  }
+
+  input,
+  textarea,
+  select {
+    max-inline-size: 100%;
+    width: 100%;
+    padding: 0.4rem;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg);
     color: var(--color-text);
   }
 
-  table {
-    border-color: var(--color-border);
+  input[type="radio"] {
+    width: auto;
   }
-}
 
-/* =========================
-   COMPONENTS
-   ========================= */
-
-@layer components {
   .skip-link {
-    position: absolute;
-    top: -40px;
-    left: 0;
-
-    background: var(--color-accent);
-    color: var(--color-button-text);
-
-    padding: 8px;
-    z-index: 100;
+    color: var(--color-accent);
   }
 
-  .skip-link:focus-visible {
-    top: 0;
-  }
-
-  a:focus-visible,
-  button:focus-visible,
-  input:focus-visible,
-  textarea:focus-visible {
-    outline: 3px solid var(--color-accent);
-    outline-offset: 2px;
+  svg {
+    color: var(--color-accent);
   }
 
   button {
+    color: white;
     background-color: var(--color-accent);
-    color: var(--color-button-text);
-
     border: 1px solid var(--color-accent);
+    border-radius: 4px;
     padding: 0.5rem 1rem;
-
     cursor: pointer;
   }
 
   button:hover {
-    background-color: color-mix(
-      in oklch,
-      var(--color-accent) 80%,
-      var(--color-text)
-    );
+    background-color: color-mix(in oklch, var(--color-accent), black 15%);
+  }
+
+  #booking-status {
+    padding-block: 0.5rem;
+  }
+
+  footer {
+    border-block-start: 1px solid var(--color-border);
+    padding-block-start: var(--space);
   }
 }
-
-/* =========================
-   UTILITIES
-   ========================= */
 
 @layer utilities {
   .text-muted {
     color: var(--color-muted);
+  }
+
+  .span-all {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
+  #schedule,
+  form {
+    grid-template-columns: 1fr;
+  }
+
+  header {
+    align-items: flex-start;
+  }
+
+  nav ul {
+    gap: 0.75rem;
   }
 }
